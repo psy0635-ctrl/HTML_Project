@@ -96,10 +96,6 @@
 
 ---
 
-
-
----
-
 ## 🧱 4. 기술 스택 및 개발 단계
 
 | 단계 | 기술 | 설명 |
@@ -108,6 +104,9 @@
 | Phase 2 | JavaScript | 동작 및 인터랙션 추가 |
 | Phase 3 | React | SPA 구조 적용 |
 | Phase 4 | Spring + DB | 데이터 저장 및 관리 |
+
+---
+
 
 ## 🚀 5. SPA 구조 (Single Page Application)
 
