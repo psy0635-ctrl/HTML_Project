@@ -75,7 +75,7 @@
 조건:
 
 - 스타일 = Street <br>
-계절 = Winter
+- 계절 = Winter
 
 👉 결과: 조건에 맞는 아이템 목록
 
@@ -88,9 +88,9 @@
 
 추천 코디:
 
-Black Jacket <br>
-Denim Pants <br>
-White Sneakers
+- Black Jacket <br>
+- Denim Pants <br>
+- White Sneakers
 
 👉 핵심: **사용자가 가진 데이터 안에서만 추천**
 
