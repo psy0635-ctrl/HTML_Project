@@ -92,6 +92,56 @@
       height: 200px;
     }
 
+    /* 카드 등장 애니메이션 */
+.box {
+  animation: fadeUp 0.6s ease;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 버튼 클릭 효과 */
+button:active {
+  transform: scale(0.97);
+}
+
+/* 결과 강조 애니메이션 */
+.highlight-anim {
+  animation: pop 0.3s ease;
+}
+
+@keyframes pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+/* SVG 부드러운 변화 */
+#new {
+  transition: all 0.5s ease;
+}
+
+/* 색상 변화 애니메이션 */
+.flash {
+  animation: flash 0.5s;
+}
+
+@keyframes flash {
+  0% { background-color: #fff; }
+  50% { background-color: #ffeaa7; }
+  100% { background-color: #fff; }
+}
+
+
+
   </style>
 </head>
 
@@ -144,63 +194,61 @@
 </div>
 
 <script>
-  const base = {
-    shoulder: 42,
-    chest: 98,
-    length: 68
-  };
+ function showResult(id, value) {
+  const el = document.getElementById(id);
 
-  function compare() {
-    const s = parseFloat(document.getElementById('shoulder').value);
-    const c = parseFloat(document.getElementById('chest').value);
-    const l = parseFloat(document.getElementById('length').value);
+  el.textContent = value > 0 ? `+${value}cm` : `${value}cm`;
+  el.className = value > 0 ? "positive highlight-anim" : "negative highlight-anim";
 
-    if (!s || !c || !l) {
-      alert("모든 값을 입력하세요");
-      return;
-    }
+  // 애니메이션 리셋 (다시 실행되게)
+  el.classList.remove("highlight-anim");
+  void el.offsetWidth;
+  el.classList.add("highlight-anim");
+}
+function compare() {
+  const s = parseFloat(document.getElementById('shoulder').value);
+  const c = parseFloat(document.getElementById('chest').value);
+  const l = parseFloat(document.getElementById('length').value);
 
-    const ds = s - base.shoulder;
-    const dc = c - base.chest;
-    const dl = l - base.length;
-
-    showResult("r_shoulder", ds);
-    showResult("r_chest", dc);
-    showResult("r_length", dl);
-
-    generateAdvice(ds, dc, dl);
-    updateSVG(s, c, l);
+  if (!s || !c || !l) {
+    alert("모든 값을 입력하세요");
+    return;
   }
 
-  function showResult(id, value) {
-    const el = document.getElementById(id);
-    el.textContent = value > 0 ? `+${value}cm` : `${value}cm`;
-    el.className = value > 0 ? "positive" : "negative";
-  }
+  // 카드 깜빡 효과
+  document.querySelectorAll('.box').forEach(box => {
+    box.classList.add('flash');
+    setTimeout(() => box.classList.remove('flash'), 500);
+  });
 
-  function generateAdvice(ds, dc, dl) {
-    let text = "";
+  const ds = s - base.shoulder;
+  const dc = c - base.chest;
+  const dl = l - base.length;
 
-    if (ds > 1) text += "어깨가 넓음<br>";
-    if (ds < -1) text += "어깨가 좁음<br>";
+  showResult("r_shoulder", ds);
+  showResult("r_chest", dc);
+  showResult("r_length", dl);
 
-    if (dc > 2) text += "가슴이 큼<br>";
-    if (dc < -2) text += "가슴이 작음<br>";
+  generateAdvice(ds, dc, dl);
+  updateSVG(s, c, l);
+}
+function updateSVG(s, c, l) {
+  const newRect = document.getElementById("new");
 
-    if (dl > 2) text += "기장이 김<br>";
-    if (dl < -2) text += "기장이 짧음<br>";
+  // 애니메이션 초기 상태
+  newRect.style.transform = "scale(0.8)";
+  newRect.style.opacity = "0.5";
 
-    if (text === "") text = "비슷한 핏";
-
-    document.getElementById("advice").innerHTML = text;
-  }
-
-  function updateSVG(s, c, l) {
-    const newRect = document.getElementById("new");
-
+  setTimeout(() => {
     newRect.setAttribute("width", c);
     newRect.setAttribute("height", l * 2);
-  }
+
+    newRect.style.transform = "scale(1)";
+    newRect.style.opacity = "1";
+  }, 100);
+}
+
+  
 </script>
 
 </body>
