@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Fit-Algorithm | Compare</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f5f6fa;
+      color: #333;
+    }
+
+    header {
+      background: #111;
+      color: #fff;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    nav a {
+      color: #fff;
+      margin-left: 20px;
+      text-decoration: none;
+    }
+
+    .container {
+      display: flex;
+      gap: 30px;
+      padding: 40px;
+      flex-wrap: wrap;
+    }
+
+    .box {
+      background: #fff;
+      padding: 25px;
+      border-radius: 15px;
+      flex: 1;
+      min-width: 300px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+
+    h2 {
+      margin-bottom: 15px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #111;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+
+    table {
+      width: 100%;
+      margin-top: 15px;
+      border-collapse: collapse;
+    }
+
+    td {
+      padding: 8px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .positive { color: red; }
+    .negative { color: blue; }
+
+    .advice {
+      margin-top: 15px;
+      line-height: 1.6;
+    }
+
+    svg {
+      margin-top: 20px;
+      width: 100%;
+      height: 200px;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Fit-Algorithm</h1>
+  <nav>
+    <a href="index1.html">Dashboard</a>
+    <a href="#">Compare</a>
+    <a href="guide.html">Guide</a>
+  </nav>
+</header>
+
+<div class="container">
+
+  <!-- 입력 -->
+  <div class="box">
+    <h2>사이즈 입력</h2>
+
+    <input type="number" id="shoulder" placeholder="어깨 (cm)">
+    <input type="number" id="chest" placeholder="가슴 (cm)">
+    <input type="number" id="length" placeholder="기장 (cm)">
+
+    <button onclick="compare()">비교하기</button>
+  </div>
+
+  <!-- 결과 -->
+  <div class="box">
+    <h2>비교 결과</h2>
+
+    <table>
+      <tr><td>어깨</td><td id="r_shoulder"></td></tr>
+      <tr><td>가슴</td><td id="r_chest"></td></tr>
+      <tr><td>기장</td><td id="r_length"></td></tr>
+    </table>
+
+    <div class="advice" id="advice"></div>
+
+    <!-- SVG -->
+    <svg>
+      <!-- 기준 -->
+      <rect id="base" x="50" y="20" width="100" height="140" fill="#ccc"></rect>
+      <!-- 비교 -->
+      <rect id="new" x="70" y="20" width="100" height="140" fill="rgba(0,0,0,0.3)"></rect>
+    </svg>
+
+  </div>
+
+</div>
+
+<script>
+  const base = {
+    shoulder: 42,
+    chest: 98,
+    length: 68
+  };
+
+  function compare() {
+    const s = parseFloat(document.getElementById('shoulder').value);
+    const c = parseFloat(document.getElementById('chest').value);
+    const l = parseFloat(document.getElementById('length').value);
+
+    if (!s || !c || !l) {
+      alert("모든 값을 입력하세요");
+      return;
+    }
+
+    const ds = s - base.shoulder;
+    const dc = c - base.chest;
+    const dl = l - base.length;
+
+    showResult("r_shoulder", ds);
+    showResult("r_chest", dc);
+    showResult("r_length", dl);
+
+    generateAdvice(ds, dc, dl);
+    updateSVG(s, c, l);
+  }
+
+  function showResult(id, value) {
+    const el = document.getElementById(id);
+    el.textContent = value > 0 ? `+${value}cm` : `${value}cm`;
+    el.className = value > 0 ? "positive" : "negative";
+  }
+
+  function generateAdvice(ds, dc, dl) {
+    let text = "";
+
+    if (ds > 1) text += "어깨가 넓음<br>";
+    if (ds < -1) text += "어깨가 좁음<br>";
+
+    if (dc > 2) text += "가슴이 큼<br>";
+    if (dc < -2) text += "가슴이 작음<br>";
+
+    if (dl > 2) text += "기장이 김<br>";
+    if (dl < -2) text += "기장이 짧음<br>";
+
+    if (text === "") text = "비슷한 핏";
+
+    document.getElementById("advice").innerHTML = text;
+  }
+
+  function updateSVG(s, c, l) {
+    const newRect = document.getElementById("new");
+
+    newRect.setAttribute("width", c);
+    newRect.setAttribute("height", l * 2);
+  }
+</script>
+
+</body>
+</html>
