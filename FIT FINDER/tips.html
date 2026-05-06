@@ -1,81 +1,181 @@
 <!DOCTYPE html>
+<!-- 
+  DOCTYPE 선언: 이 파일이 HTML5 문서임을 브라우저에게 알려주는 선언문
+  반드시 HTML 파일의 첫 줄에 위치해야 함
+-->
+
 <html lang="ko">
 <head>
+
   <meta charset="UTF-8">
+  <!-- 한글 깨짐 방지를 위한 UTF-8 인코딩 설정 -->
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- 모바일 화면 대응 설정 (기기 너비에 맞게 화면 조정) -->
+
   <title>FIT FINDER | Tips</title>
+  <!-- 
+    브라우저 탭에 표시되는 페이지 제목
+    | (파이프) 기호로 사이트명과 페이지명을 구분하는 흔한 작성 방식
+  -->
+
   <link rel="stylesheet" href="css/style.css">
+  <!-- 외부 CSS 파일 연결, style.css에 작성된 디자인이 이 페이지에 적용됨 -->
+
 </head>
 
 <body>
 
+
+<!-- =============================================
+     HEADER : 상단 로고 + 네비게이션 메뉴 영역
+============================================= -->
 <header class="header">
+
   <h1><a href="index.html">FIT FINDER</a></h1>
+  <!-- 로고 클릭 시 메인 페이지(index.html)로 이동 -->
 
   <nav>
+  <!-- 사이트 내 페이지 이동 링크 묶음 -->
     <a href="index.html">Intro</a>
     <a href="guide.html">Guide</a>
-    <a href="tips.html">Tips</a>
+    <a href="tips.html">Tips</a>      <!-- 현재 페이지 -->
     <a href="about.html">About</a>
   </nav>
+
 </header>
 
+
+<!-- =============================================
+     MAIN : 페이지 핵심 콘텐츠 전체 영역
+============================================= -->
 <main class="tips-page">
+<!-- 
+  <main> : 페이지의 핵심 콘텐츠를 담는 시맨틱 태그
+  한 페이지에 하나만 사용하는 것이 원칙
+  class="tips-page" → Tips 페이지 전체 레이아웃 스타일 지정
+-->
 
+
+  <!-- =============================================
+       TIPS HERO : 페이지 상단 소개 텍스트 영역
+  ============================================= -->
   <section class="tips-hero">
+  <!-- 
+    <section> : 하나의 주제를 가진 독립적인 구역 태그
+    히어로(Hero) 섹션: 페이지 진입 시 가장 먼저 보이는 타이틀 구역
+    index.html과 달리 이 페이지는 영상 없이 텍스트만으로 구성
+  -->
+
     <p>STYLE TIPS</p>
+    <!-- 섹션 상단 레이블 텍스트 (소문자보다 대문자로 강조하는 디자인 패턴) -->
+
     <h2>Easy rules for better fit.</h2>
+    <!-- 섹션 메인 타이틀 -->
+
     <span>
-      어렵게 외우지 않아도 됩니다. 체형별로 “어디에 시선을 줄지”만 알면 핏이 훨씬 좋아집니다.
+      어렵게 외우지 않아도 됩니다. 체형별로 "어디에 시선을 줄지"만 알면 핏이 훨씬 좋아집니다.
     </span>
+    <!-- 
+      <span> : 인라인 요소를 묶는 태그
+      여기서는 타이틀 아래 보조 설명 문구를 스타일링하기 위한 용도
+    -->
+
   </section>
+  <!-- /TIPS HERO 끝 -->
 
+
+  <!-- =============================================
+       TIPS GRID : 체형별 팁 카드 6개 영역
+  ============================================= -->
   <section class="easy-tips-grid">
+  <!-- 
+    class="easy-tips-grid" → CSS Grid로 카드 6개를 격자 형태로 배열
+    실제 Grid 설정은 style.css의 .easy-tips-grid에서 확인 가능
+  -->
 
+    <!-- -------------------------------------------
+         팁 카드 1 : TRIANGLE (하체가 고민인 체형)
+         카드 전체가 guide.html#triangle 로 이동하는 링크
+    ------------------------------------------- -->
     <a href="guide.html#triangle" class="easy-tip-card">
+    <!-- 
+      <a> 태그로 카드 전체를 링크로 감싸서 카드 어디를 클릭해도 이동 가능하게 함
+      href="guide.html#triangle" → guide.html 페이지의 id="triangle" 위치로 이동
+      class="easy-tip-card" → 모든 팁 카드에 공통으로 적용되는 CSS 스타일
+    -->
+
       <div class="tip-top">
-        <span>01</span>
+      <!-- 카드 상단 번호 + 체형명을 묶는 컨테이너 -->
+        <span>01</span>              <!-- 카드 번호 -->
         <strong>TRIANGLE</strong>
+        <!-- 
+          <strong> : 텍스트를 굵게 표시하는 태그
+          단순히 굵게 보이는 것뿐 아니라 "이 내용이 중요하다"는 의미도 내포
+          시맨틱 측면에서 <b> 태그보다 <strong> 사용을 권장
+        -->
       </div>
 
       <h3>하체가 고민이라면?</h3>
+      <!-- 카드의 핵심 질문, 사용자가 자신의 고민과 연결하게 유도 -->
+
       <p>시선을 상체로 올려 전체 균형을 맞추는 것이 핵심입니다.</p>
+      <!-- 해당 체형의 핵심 스타일 전략 한 줄 요약 -->
 
       <div class="tip-tags">
+      <!-- 키워드 태그들을 묶는 컨테이너 -->
         <span>밝은 상의</span>
         <span>어깨 라인</span>
         <span>A라인</span>
+        <!-- 
+          각 <span>이 하나의 태그(badge) 역할
+          CSS에서 배경색, 테두리 등으로 태그처럼 보이게 스타일링
+        -->
       </div>
 
       <div class="tip-do-dont">
+      <!-- DO / DON'T 두 항목을 나란히 배치하는 컨테이너 -->
+
         <div>
           <h4>DO</h4>
+          <!-- <h4> : 소제목 태그, 여기서는 "추천" 레이블 역할 -->
           <p>상체 포인트, 어두운 하의</p>
         </div>
+
         <div>
           <h4>DON'T</h4>
+          <!-- 비추천 레이블 -->
           <p>스키니진, 밝은 하의</p>
         </div>
+
       </div>
 
       <em>Guide에서 자세히 보기 →</em>
-    </a>
+      <!-- 
+        <em> : 텍스트를 기울임체(이탤릭)로 표시하는 태그
+        단순 기울임인 <i> 태그와 달리 "강조"의 의미를 내포
+        카드 하단 링크 유도 문구로 사용
+      -->
 
+    </a>
+    <!-- /카드 1 끝 -->
+
+
+    <!-- -------------------------------------------
+         팁 카드 2 : INVERTED (어깨가 넓은 체형)
+    ------------------------------------------- -->
     <a href="guide.html#inverted" class="easy-tip-card">
       <div class="tip-top">
         <span>02</span>
         <strong>INVERTED</strong>
       </div>
-
       <h3>어깨가 넓어 보인다면?</h3>
       <p>하체에 볼륨을 더해서 상체와 하체의 균형을 맞춰보세요.</p>
-
       <div class="tip-tags">
         <span>와이드 팬츠</span>
         <span>A라인 하의</span>
         <span>V넥</span>
       </div>
-
       <div class="tip-do-dont">
         <div>
           <h4>DO</h4>
@@ -86,25 +186,26 @@
           <p>어깨 패드, 퍼프 소매</p>
         </div>
       </div>
-
       <em>Guide에서 자세히 보기 →</em>
     </a>
+    <!-- /카드 2 끝 -->
 
+
+    <!-- -------------------------------------------
+         팁 카드 3 : RECTANGLE (직선형 체형)
+    ------------------------------------------- -->
     <a href="guide.html#rectangle" class="easy-tip-card">
       <div class="tip-top">
         <span>03</span>
         <strong>RECTANGLE</strong>
       </div>
-
       <h3>실루엣이 밋밋하다면?</h3>
       <p>허리선을 만들어주면 직선형 체형도 훨씬 입체적으로 보입니다.</p>
-
       <div class="tip-tags">
         <span>벨트</span>
         <span>크롭 자켓</span>
         <span>하이웨스트</span>
       </div>
-
       <div class="tip-do-dont">
         <div>
           <h4>DO</h4>
@@ -115,25 +216,26 @@
           <p>박스핏, 통짜 원피스</p>
         </div>
       </div>
-
       <em>Guide에서 자세히 보기 →</em>
     </a>
+    <!-- /카드 3 끝 -->
 
+
+    <!-- -------------------------------------------
+         팁 카드 4 : HOURGLASS (균형형 체형)
+    ------------------------------------------- -->
     <a href="guide.html#hourglass" class="easy-tip-card">
       <div class="tip-top">
         <span>04</span>
         <strong>HOURGLASS</strong>
       </div>
-
       <h3>비율이 좋은 체형이라면?</h3>
       <p>장점인 허리 라인을 가리지 않는 스타일이 가장 잘 어울립니다.</p>
-
       <div class="tip-tags">
         <span>슬림핏</span>
         <span>벨티드 자켓</span>
         <span>랩 원피스</span>
       </div>
-
       <div class="tip-do-dont">
         <div>
           <h4>DO</h4>
@@ -144,25 +246,26 @@
           <p>과한 오버핏, 박시핏</p>
         </div>
       </div>
-
       <em>Guide에서 자세히 보기 →</em>
     </a>
+    <!-- /카드 4 끝 -->
 
+
+    <!-- -------------------------------------------
+         팁 카드 5 : ROUND (상체 볼륨형 체형)
+    ------------------------------------------- -->
     <a href="guide.html#round" class="easy-tip-card">
       <div class="tip-top">
         <span>05</span>
         <strong>ROUND</strong>
       </div>
-
       <h3>상체가 답답해 보인다면?</h3>
       <p>세로 라인을 만들어주면 전체 실루엣이 더 길고 슬림해 보입니다.</p>
-
       <div class="tip-tags">
         <span>롱 아우터</span>
         <span>V넥</span>
         <span>스트레이트 팬츠</span>
       </div>
-
       <div class="tip-do-dont">
         <div>
           <h4>DO</h4>
@@ -173,25 +276,26 @@
           <p>짧은 상의, 두꺼운 니트</p>
         </div>
       </div>
-
       <em>Guide에서 자세히 보기 →</em>
     </a>
+    <!-- /카드 5 끝 -->
 
+
+    <!-- -------------------------------------------
+         팁 카드 6 : TRAPEZOID (균형 안정형 체형)
+    ------------------------------------------- -->
     <a href="guide.html#trapezoid" class="easy-tip-card">
       <div class="tip-top">
         <span>06</span>
         <strong>TRAPEZOID</strong>
       </div>
-
       <h3>균형 잡힌 체형이라면?</h3>
       <p>과한 디자인보다 깔끔한 핏을 유지하는 것이 가장 세련됩니다.</p>
-
       <div class="tip-tags">
         <span>테일러드</span>
         <span>셋업</span>
         <span>스트레이트핏</span>
       </div>
-
       <div class="tip-do-dont">
         <div>
           <h4>DO</h4>
@@ -202,25 +306,54 @@
           <p>과한 루즈핏, 긴 상의</p>
         </div>
       </div>
-
       <em>Guide에서 자세히 보기 →</em>
     </a>
+    <!-- /카드 6 끝 -->
+
 
   </section>
+  <!-- /TIPS GRID 끝 -->
 
+
+  <!-- =============================================
+       TIPS SUMMARY : 하단 마무리 메시지 영역
+  ============================================= -->
   <section class="tips-summary">
+  <!-- 
+    페이지 마지막에 위치한 마무리 섹션
+    카드들을 다 본 사용자에게 핵심 메시지를 한 번 더 전달하는 역할
+  -->
+
     <p>FINAL NOTE</p>
+    <!-- 섹션 레이블 -->
+
     <h3>핏은 유행보다 균형에서 시작됩니다.</h3>
+    <!-- 
+      <h3> : 이 섹션의 핵심 메시지
+      페이지 전체를 관통하는 FIT FINDER의 핵심 철학을 한 줄로 요약
+    -->
+
     <span>
-      옷을 고를 때는 “무엇이 유행인가?”보다 “내 체형에서 어디를 강조하고 어디를 정리할 것인가?”를 먼저 생각해보세요.
+      옷을 고를 때는 "무엇이 유행인가?"보다 "내 체형에서 어디를 강조하고 어디를 정리할 것인가?"를 먼저 생각해보세요.
     </span>
+    <!-- 핵심 메시지를 보완하는 실용적인 조언 문구 -->
+
   </section>
+  <!-- /TIPS SUMMARY 끝 -->
+
 
 </main>
+<!-- /MAIN 끝 -->
 
+
+<!-- =============================================
+     FOOTER : 하단 저작권 정보 영역
+============================================= -->
 <footer class="footer">
   © 2026 FIT FINDER
+  <!-- © : 저작권 기호, HTML에서 &copy; 로도 표현 가능 -->
 </footer>
+
 
 </body>
 </html>

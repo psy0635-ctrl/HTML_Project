@@ -1,46 +1,165 @@
 <!DOCTYPE html>
-<html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FIT FINDER - Guide</title>
-  <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
+<!-- 
+  DOCTYPE 선언: 이 파일이 HTML5 문서임을 브라우저에게 알려주는 선언문
+  반드시 HTML 파일의 첫 줄에 위치해야 함
+-->
 
+<html lang="ko">
+<!-- 
+  <html> : HTML 문서의 시작과 끝을 나타내는 최상위 태그
+  lang="ko" : 이 페이지의 언어가 한국어임을 명시
+              스크린리더(시각장애인용 도구)나 검색 엔진이 언어를 인식할 때 사용됨
+-->
+
+<head>
+<!-- 
+  <head> : 브라우저 화면에 보이지 않는 문서 설정 정보를 담는 영역
+           제목, 인코딩 방식, 외부 파일 연결 등을 여기서 설정함
+-->
+
+  <meta charset="UTF-8">
+  <!-- 
+    문자 인코딩 방식을 UTF-8로 설정
+    UTF-8은 한글, 영어, 특수문자 등 전 세계 문자를 모두 표현할 수 있는 방식
+    이 설정이 없으면 한글이 깨져서 보일 수 있음
+  -->
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- 
+    모바일 화면 대응 설정
+    width=device-width  → 화면 너비를 기기의 실제 너비에 맞춤
+    initial-scale=1.0   → 초기 화면 배율을 100%로 설정 (확대/축소 없음)
+    이 설정이 없으면 모바일에서 PC 버전 화면이 그대로 축소되어 보임
+  -->
+
+  <title>FIT FINDER - Guide</title>
+  <!-- 
+    브라우저 탭에 표시되는 페이지 제목
+    검색 엔진 결과에도 이 텍스트가 표시됨
+  -->
+
+  <link rel="stylesheet" href="css/style.css">
+  <!-- 
+    외부 CSS 파일을 현재 HTML 문서에 연결하는 태그
+    rel="stylesheet" → 연결하는 파일이 CSS 스타일시트임을 명시
+    href="css/style.css" → 연결할 CSS 파일 경로
+    이 줄 덕분에 style.css에 작성된 디자인이 이 페이지에 적용됨
+  -->
+
+</head>
+
+<body>
+<!-- 
+  <body> : 브라우저 화면에 실제로 표시되는 모든 내용을 담는 영역
+           텍스트, 이미지, 버튼 등 사용자 눈에 보이는 것은 모두 여기에 작성
+-->
+
+<!-- =============================================
+     HEADER : 상단 로고 + 네비게이션 메뉴 영역
+============================================= -->
 <header class="header">
+<!-- 
+  <header> : 페이지 상단 영역을 나타내는 시맨틱 태그
+  class="header" → CSS에서 .header 라는 이름으로 스타일을 지정할 수 있음
+-->
+
   <h1><a href="index.html">FIT FINDER</a></h1>
+  <!-- 
+    <h1> : 페이지에서 가장 중요한 제목 태그 (h1 ~ h6 중 최상위)
+    <a href="index.html"> : 하이퍼링크 태그, 클릭하면 index.html(메인 페이지)로 이동
+    로고를 클릭하면 홈으로 돌아가는 흔한 UX 패턴
+  -->
+
   <nav>
-    <a href="index.html">Intro</a>
-    <a href="guide.html">Guide</a>
-    <a href="tips.html">Tips</a>
-    <a href="about.html">About</a>
+  <!-- 
+    <nav> : 네비게이션(메뉴) 영역을 나타내는 시맨틱 태그
+            사이트 내 다른 페이지로 이동하는 링크들을 묶는 용도
+  -->
+    <a href="index.html">Intro</a>    <!-- 메인 페이지 이동 링크 -->
+    <a href="guide.html">Guide</a>    <!-- 현재 페이지 (가이드) -->
+    <a href="tips.html">Tips</a>      <!-- 스타일 팁 페이지 이동 링크 -->
+    <a href="about.html">About</a>    <!-- 프로젝트 소개 페이지 이동 링크 -->
   </nav>
+
 </header>
 
+
+<!-- =============================================
+     MAIN : 체형별 스타일 가이드 카드 영역
+============================================= -->
 <section class="guide-section">
+<!-- 
+  <section> : 하나의 주제를 가진 독립적인 구역을 나타내는 시맨틱 태그
+  <div>와 달리 "관련된 내용의 묶음"이라는 의미를 내포함
+-->
+
   <h2>Find your best fit.</h2>
+  <!-- <h2> : h1보다 한 단계 낮은 소제목, 가이드 섹션의 타이틀 역할 -->
+
   <p>체형별로 어울리는 핏과 피해야 할 핏을 한눈에 확인하세요.</p>
+  <!-- <p> : 단락(paragraph) 태그, 일반 본문 텍스트를 작성할 때 사용 -->
 
   <div class="guide-grid">
+  <!-- 
+    <div> : 특별한 의미 없이 요소들을 묶는 컨테이너 태그
+    class="guide-grid" → CSS Grid를 적용해 카드들을 격자 형태로 배열
+    실제 Grid 설정은 style.css의 .guide-grid에서 확인 가능
+  -->
 
+
+    <!-- -------------------------------------------
+         카드 1 : Triangle (하체가 발달한 체형)
+    ------------------------------------------- -->
     <div class="image-guide-card" id="triangle">
+    <!-- 
+      class="image-guide-card" → 모든 카드에 공통으로 적용되는 CSS 스타일
+      id="triangle" → 이 카드만의 고유 식별자, CSS에서 #triangle로 개별 스타일 지정 가능
+    -->
+
       <div class="card-bg">
+      <!-- 이미지를 감싸는 배경 컨테이너, 이미지 크기/비율을 통일하기 위해 분리 -->
+
         <img src="./images/Triangle.jpg" alt="Triangle style">
+        <!-- 
+          <img> : 이미지 삽입 태그 (닫는 태그 없음)
+          src="./images/Triangle.jpg" → 이미지 파일 경로 (./ 는 현재 폴더를 의미)
+          alt="Triangle style" → 이미지 로드 실패 시 표시되는 대체 텍스트
+                                  스크린리더(시각장애인용)에서도 이 텍스트를 읽어줌
+        -->
       </div>
+
       <span>01</span>
+      <!-- 
+        <span> : 인라인 요소를 묶는 태그, 여기서는 카드 번호 표시 용도
+        <div>는 줄바꿈이 생기는 블록 요소, <span>은 줄바꿈 없는 인라인 요소
+      -->
+
       <h3>Triangle</h3>
+      <!-- <h3> : h2보다 한 단계 낮은 소제목, 카드 내 체형 이름 표시 -->
+
       <p>하체가 상대적으로 발달한 체형</p>
+
       <div class="fit-box">
+      <!-- 추천 핏 정보를 담는 박스 컨테이너 -->
         <h4>추천 핏</h4>
+        <!-- <h4> : 박스 내 타이틀 역할 -->
         <p>어깨 라인이 강조된 자켓, 밝은 상의 + 어두운 하의,<br>A라인 스커트, 크롭 상의로 상체 비율 강조</p>
+        <!-- <br> : 줄바꿈 태그, 닫는 태그 없이 단독으로 사용 -->
       </div>
+
       <div class="fit-box">
+      <!-- 비추천 핏 정보를 담는 박스 컨테이너 -->
         <h4>비추천 핏</h4>
         <p>스키니진, 밝은 하의, 볼륨감 있는 하의는<br>하체를 더욱 부각시켜 비율이 무너질 수 있음</p>
       </div>
-    </div>
 
+    </div>
+    <!-- /카드 1 끝 -->
+
+
+    <!-- -------------------------------------------
+         카드 2 : Inverted (어깨가 넓고 하체가 슬림한 체형)
+    ------------------------------------------- -->
     <div class="image-guide-card" id="inverted">
       <div class="card-bg">
         <img src="./images/Inverted Triangle.jpg" alt="Inverted Triangle style">
@@ -57,10 +176,16 @@
         <p>어깨 패드가 강한 자켓, 하이넥, 크롭 자켓은<br>상체를 더 넓어 보이게 만들 수 있음</p>
       </div>
     </div>
+    <!-- /카드 2 끝 -->
 
+
+    <!-- -------------------------------------------
+         카드 3 : Rectangle (상하체 폭이 비슷한 직선형 체형)
+    ------------------------------------------- -->
     <div class="image-guide-card" id="rectangle">
       <div class="card-bg">
         <img src="./images/Rectangle.webp" alt="Rectangle style">
+        <!-- .webp : 구글이 만든 이미지 포맷, jpg/png보다 파일 크기가 작아 웹 성능에 유리 -->
       </div>
       <span>03</span>
       <h3>Rectangle</h3>
@@ -74,7 +199,12 @@
         <p>박스핏, 일자 원피스, 오버핏 셋업은<br>체형을 더 평면적이고 밋밋하게 보이게 함</p>
       </div>
     </div>
+    <!-- /카드 3 끝 -->
 
+
+    <!-- -------------------------------------------
+         카드 4 : Hourglass (허리선이 뚜렷한 체형)
+    ------------------------------------------- -->
     <div class="image-guide-card" id="hourglass">
       <div class="card-bg">
         <img src="./images/Hourglass.jpg" alt="Hourglass style">
@@ -91,7 +221,12 @@
         <p>허리선 없는 오버핏, 박시한 상의,<br>루즈한 원피스는 장점인 허리 라인을 가림</p>
       </div>
     </div>
+    <!-- /카드 4 끝 -->
 
+
+    <!-- -------------------------------------------
+         카드 5 : Round (상체 중심에 볼륨이 있는 체형)
+    ------------------------------------------- -->
     <div class="image-guide-card" id="round">
       <div class="card-bg">
         <img src="./images/Round.jpg" alt="Round style">
@@ -108,7 +243,12 @@
         <p>짧은 상의, 타이트한 상의, 두꺼운 소재는<br>상체 볼륨을 더 강조해 답답해 보일 수 있음</p>
       </div>
     </div>
+    <!-- /카드 5 끝 -->
 
+
+    <!-- -------------------------------------------
+         카드 6 : Trapezoid (전체 균형이 안정적인 체형)
+    ------------------------------------------- -->
     <div class="image-guide-card" id="trapezoid">
       <div class="card-bg">
         <img src="./images/Trapezoid.jpg" alt="Trapezoid style">
@@ -125,12 +265,28 @@
         <p>과한 오버핏, 루즈한 하의, 무너지는 실루엣은<br>균형 잡힌 체형의 장점을 흐릴 수 있음</p>
       </div>
     </div>
+    <!-- /카드 6 끝 -->
+
 
   </div>
-</section>
+  <!-- /guide-grid 끝 : 6개 카드를 감싸는 그리드 컨테이너 닫힘 -->
 
+</section>
+<!-- /guide-section 끝 -->
+
+
+<!-- =============================================
+     FOOTER : 하단 저작권 정보 영역
+============================================= -->
 <footer class="footer">
+<!-- 
+  <footer> : 페이지 하단 영역을 나타내는 시맨틱 태그
+  일반적으로 저작권 표시, 연락처, 사이트맵 링크 등을 담음
+-->
+
   © 2026 FIT FINDER
+  <!-- © : 저작권 기호 (copyright symbol), HTML에서 &copy; 로도 표현 가능 -->
+
 </footer>
 
 </body>

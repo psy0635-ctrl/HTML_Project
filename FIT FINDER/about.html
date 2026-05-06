@@ -4,14 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FIT FINDER | About</title>
+  <!-- 외부 스타일시트 연결: 사이트의 전체적인 디자인(CSS)을 담당합니다 -->
   <link rel="stylesheet" href="./css/style.css">
 </head>
 
 <body>
 
+<!-- [HEADER] 사이트 상단 영역: 로고와 주요 메뉴(내비게이션)가 포함됨 -->
 <header class="header">
+  <!-- 사이트 제목이자 홈으로 가는 링크 -->
   <h1><a href="index.html">FIT FINDER</a></h1>
 
+  <!-- 글로벌 메뉴: 클릭 시 해당 페이지로 이동 -->
   <nav>
     <a href="index.html">Intro</a>
     <a href="guide.html">Guide</a>
@@ -20,17 +24,21 @@
   </nav>
 </header>
 
+<!-- [MAIN] 본문 영역: About 페이지의 핵심 콘텐츠가 들어가는 곳 -->
 <main class="about-page">
 
-  <!-- HERO : 영상 배경 + 텍스트 -->
+  <!-- [SECTION 1] 히어로 섹션: 첫인상을 결정하는 영상 배경과 메인 카피 -->
   <section class="about-hero-bg">
 
+    <!-- 배경 영상: 자동 재생(autoplay), 음소거(muted), 무한 반복(loop) 설정 -->
     <video autoplay muted loop playsinline>
       <source src="https://assets.awwwards.com/awards/element/2025/09/68da7f85ac54e502747940.mp4" type="video/mp4">
     </video>
 
+    <!-- 오버레이 레이어: 영상 위에 반투명한 막을 씌워 텍스트 가독성을 높임 -->
     <div class="about-hero-layer"></div>
 
+    <!-- 히어로 텍스트 콘텐츠 -->
     <div class="about-hero-content">
       <p>ABOUT PROJECT</p>
 
@@ -44,6 +52,7 @@
         추천 핏과 피해야 할 핏을 한눈에 확인할 수 있도록 만든 체형별 패션 가이드 웹사이트입니다.
       </span>
 
+      <!-- 클릭 유도 버튼(Call to Action) -->
       <div class="about-buttons">
         <a href="guide.html">View Guide →</a>
         <a href="https://github.com/psy0635-ctrl/HTML_Project.git">GitHub →</a>
@@ -52,9 +61,10 @@
 
   </section>
 
-  <!-- PROJECT INFO -->
+  <!-- [SECTION 2] 프로젝트 상세 정보: 프로젝트의 목표와 배경을 3단 구조로 설명 -->
   <section class="about-info-final">
 
+    <!-- 목표 설명 카드 -->
     <article>
       <span>01</span>
       <h3>Project Goal</h3>
@@ -64,6 +74,7 @@
       </p>
     </article>
 
+    <!-- 기획 배경 카드 -->
     <article>
       <span>02</span>
       <h3>Why This Topic?</h3>
@@ -73,6 +84,7 @@
       </p>
     </article>
 
+    <!-- 주요 기능 카드 -->
     <article>
       <span>03</span>
       <h3>Main Features</h3>
@@ -84,18 +96,19 @@
 
   </section>
 
-  <!-- DESIGN POINT -->
+  <!-- [SECTION 3] 디자인 포인트: 웹사이트의 시각적 컨셉 설명 -->
   <section class="about-design-point">
 
     <div>
       <p>DESIGN POINT</p>
       <h3>Dark Glassmorphism UI</h3>
       <span>
-        전체 디자인은 다크 톤과 글래스모피즘 효과를 활용하여
+        전체 디자인은 다크 톤과 글래스모피즘(유리처럼 투명한 느낌) 효과를 활용하여
         패션 아카이브처럼 고급스럽고 감각적인 분위기를 만들었습니다.
       </span>
     </div>
 
+    <!-- 디자인을 상징하는 핵심 키워드 나열 -->
     <div class="design-keywords">
       <span>Dark Tone</span>
       <span>Glass Card</span>
@@ -106,7 +119,7 @@
 
   </section>
 
-  <!-- TECH STACK -->
+  <!-- [SECTION 4] 기술 스택: 사이트 제작에 사용된 기술 정보 -->
   <section class="about-tech-final">
 
     <div class="tech-title">
@@ -114,10 +127,11 @@
       <h3>HTML5 + CSS3</h3>
       <span>
         현재 버전은 JavaScript 없이 HTML5와 CSS3만 사용한 정적 웹사이트입니다.
-        CSS Grid, Flexbox, Border, Hover, Transition, Glassmorphism 효과를 활용했습니다.
+        레이아웃과 애니메이션 모두 순수 CSS 기술로 구현되었습니다.
       </span>
     </div>
 
+    <!-- 사용된 기술 상세 그리드 -->
     <div class="tech-grid">
       <div>
         <strong>HTML5</strong>
@@ -136,7 +150,7 @@
 
       <div>
         <strong>Hover</strong>
-        <p>사용자 반응형 인터랙션</p>
+        <p>마우스 반응형 인터랙션</p>
       </div>
     </div>
 
@@ -144,6 +158,7 @@
 
 </main>
 
+<!-- [FOOTER] 하단 영역: 저작권 및 연도 표시 -->
 <footer class="footer">
   © 2026 FIT FINDER
 </footer>

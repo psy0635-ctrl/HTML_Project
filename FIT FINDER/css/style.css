@@ -1,88 +1,225 @@
-/* ===============================
-   FIT FINDER TOTAL STYLE
-   index / guide / tips / about
-================================ */
+
+/* ==========================================================================
+    1단계 — :root (CSS 변수 선언)
+   
+   :root = 문서 전체를 가리키는 최상위 선택자
+   여기서 "--변수이름: 값" 형식으로 변수를 선언하면
+   파일 어디서든 "var(--변수이름)"으로 가져다 쓸 수 있어.
+   
+   왜 쓰냐? → 나중에 색을 바꿀 때 이 한 곳만 수정하면 전체가 바뀜.
+   예: --accent 색을 골드에서 빨간색으로 바꾸면 버튼, 테두리, 태그 전부 한번에 변경됨.
+========================================================================== */
 
 :root {
+  /* 📦 배경색 계열 */
   --bg: #17171b;
+  /* 기본 배경색. 순수한 검정(#000000)보다 살짝 밝은 어두운 회색.
+     완전 검정보다 눈이 덜 피로하고 더 세련되게 보임. */
+
   --bg-dark: #101012;
+  /* --bg보다 더 어두운 배경. 
+     섹션 구분이나 헤더 뒤쪽 등 더 깊어 보여야 할 곳에 사용. */
+
+  /* 🪟 유리(Glass) 효과용 변수 */
   --glass: rgba(255, 255, 255, 0.085);
+  /* rgba = Red, Green, Blue, Alpha(투명도) 형식.
+     흰색(255,255,255)에 투명도 8.5%(0.085)를 적용.
+     → 완전히 투명하지도, 불투명하지도 않은 "뿌연 유리" 느낌의 흰색. */
+
   --glass-light: rgba(255, 255, 255, 0.15);
+  /* --glass보다 조금 더 밝은 버전 (투명도 15%).
+     호버(마우스 올렸을 때)할 때 카드가 더 밝아지는 효과에 사용. */
+
+  /* 🔲 테두리(border)색 계열 */
   --border: rgba(255, 255, 255, 0.18);
+  /* 기본 테두리: 반투명 흰색 18%.
+     어두운 배경 위에서 은은하게 구분선 역할을 함. */
+
   --border-strong: rgba(230, 207, 167, 0.45);
+  /* 강조 테두리: 골드/베이지 계열 색상, 45% 불투명도.
+     마우스 호버 시 카드에 골드 테두리가 생기는 효과에 사용. */
+
+  /* 🔤 텍스트(글자)색 계열 */
   --text: #ffffff;
+  /* 기본 텍스트: 순백색. 제목, 강조 텍스트 등 가장 눈에 띄어야 할 글자. */
+
   --sub: #dcdce4;
+  /* 보조 텍스트: 약간 회색빛이 도는 흰색.
+     본문 설명글, 카드 설명 등 제목보다 덜 강조되어야 할 글자. */
+
   --muted: #b7b7c0;
+  /* 흐린 텍스트: --sub보다 더 어두운 회색.
+     카테고리 라벨, 태그 등 가장 조용하게 표시되어야 할 텍스트. */
+
+  /* ✨ 포인트(강조) 컬러 */
   --accent: #e6cfa7;
+  /* 포인트 컬러: 따뜻한 골드/베이지 톤.
+     버튼 테두리, 호버 효과, 번호 뱃지 등 
+     "여기 봐주세요!"라고 강조하고 싶을 때 쓰는 색. */
 }
 
-/* ===============================
-   RESET
-================================ */
+
+/* ==========================================================================
+   🔄 2단계 — RESET (브라우저 기본값 초기화)
+   
+   브라우저(크롬, 파이어폭스 등)마다 기본으로 적용하는 스타일이 달라.
+   어떤 브라우저는 h1에 기본 margin을 20px, 또 어떤 브라우저는 16px 줌.
+   이런 차이를 없애고 내가 원하는 대로 깔끔하게 시작하려고 초기화함.
+========================================================================== */
 
 * {
+  /* * = "모든 요소"에 적용되는 선택자 */
+  
   margin: 0;
+  /* margin = 요소 바깥쪽 여백.
+     브라우저 기본값으로 h1, p, ul 등에 margin이 붙어있어서 전부 0으로 초기화. */
+
   padding: 0;
+  /* padding = 요소 안쪽 여백.
+     기본으로 붙어있는 안쪽 여백도 전부 제거. */
+
   box-sizing: border-box;
+  /* width를 계산하는 방식 변경.
+     
+     기본값(content-box): width 300px + padding 20px = 실제 크기 320px (예상 밖으로 커짐)
+     border-box:          width 300px이라고 하면 padding 포함해서 300px 유지
+     
+     → border-box로 바꾸면 width 값이 곧 눈에 보이는 최종 크기가 되어 계산이 쉬워짐. */
 }
 
 html {
   scroll-behavior: smooth;
+  /* 페이지 내 앵커 링크(예: <a href="#section2">)를 클릭했을 때
+     뚝 끊기지 않고 부드럽게 스크롤되도록 설정.
+     smooth가 없으면 클릭 즉시 순간이동하듯 점프함. */
 }
 
 body {
   min-height: 100vh;
+  /* vh = Viewport Height. 화면 높이의 100%.
+     콘텐츠가 적어도 배경이 화면 전체를 채우도록 최소 높이 지정. */
+
   background:
+    /* ▼ 배경은 여러 레이어를 콤마(,)로 쌓을 수 있어. 위에 쓴 것이 앞쪽 레이어. */
+
     radial-gradient(circle at 15% 10%, rgba(230, 207, 167, 0.12), transparent 26%),
+    /* radial-gradient = 원형 그라디언트.
+       - circle: 원형 모양
+       - at 15% 10%: 왼쪽에서 15%, 위에서 10% 지점을 중심으로
+       - rgba(230,207,167, 0.12): 골드 색 12% 투명도에서 시작
+       - transparent 26%: 26% 지점부터 완전히 투명해짐
+       → 화면 좌상단에 희미한 골드빛 조명이 비추는 효과 */
+
     linear-gradient(135deg, #1d1d22, #111113);
+    /* linear-gradient = 직선 그라디언트.
+       - 135deg: 우상단→좌하단 방향 대각선
+       - #1d1d22에서 #111113으로 점점 더 어두워짐
+       → 전체 배경의 기본 색상 */
+
   color: var(--text);
+  /* body에 color를 지정하면 모든 자식 요소가 이 색을 기본으로 상속받음.
+     개별 요소에서 색을 다시 지정하지 않으면 흰색 글자가 기본. */
+
   font-family: "Times New Roman", serif;
+  /* 폰트 우선순위 지정.
+     "Times New Roman"이 있으면 사용, 없으면 serif 계열 폰트 중 아무거나 사용.
+     serif = 글자 끝에 삐침이 있는 스타일 (신문, 잡지 느낌) */
+
   overflow-x: hidden;
+  /* 가로(x축) 방향으로 넘치는 내용을 숨김.
+     잘못 배치된 요소 때문에 가로 스크롤바가 생기는 것을 방지. */
 }
 
 a {
   color: inherit;
+  /* 링크(<a>)의 기본 파란색 제거. 
+     inherit = 부모 요소의 색을 그대로 가져옴.
+     → 디자인에 맞는 색으로 덮어쓰기 쉽게 하기 위함. */
+
   text-decoration: none;
+  /* 링크 기본 밑줄 제거. */
 }
 
-p,
-span,
-li {
+p, span, li {
   color: var(--sub);
+  /* 본문용 태그들은 기본적으로 보조 텍스트색 적용.
+     제목(h1~h6)보다 한 단계 흐리게 해서 
+     제목과 본문이 자연스럽게 구분되도록 함. */
 }
 
-/* ===============================
-   HEADER
-================================ */
+
+/* ==========================================================================
+   📌 3단계 — HEADER (고정 상단 네비게이션 바)
+   
+   두 가지 클래스(.header, .ff-header)를 같이 써서 같은 스타일을 적용함.
+   쉼표(,)로 구분하면 두 선택자에 동일한 스타일을 한번에 줄 수 있어.
+========================================================================== */
 
 .header,
 .ff-header {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 72px;
+  /* fixed = 스크롤해도 화면 특정 위치에 고정.
+     position 종류:
+     - static: 기본값, 문서 흐름대로 배치
+     - relative: 원래 위치에서 이동 가능
+     - absolute: 부모 요소 기준으로 위치 지정
+     - fixed: 브라우저 화면(viewport) 기준으로 위치 고정 ← 지금 이것 */
+
+  top: 0;    /* 화면 맨 위에 붙이기 */
+  left: 0;   /* 화면 맨 왼쪽에 붙이기 */
+  width: 100%; /* 화면 전체 너비 차지 */
+  height: 72px; /* 헤더 높이 72px 고정 */
+
   padding: 0 34px;
+  /* 패딩 단축 표기: 위아래 0, 좌우 34px
+     → 헤더 내용이 화면 양 끝에 딱 붙지 않도록 좌우 여백 줌 */
+
   background: rgba(15, 15, 18, 0.82);
+  /* 헤더 배경: 거의 검정에 가까운 색, 투명도 82%.
+     완전 불투명하지 않아서 스크롤하면 뒤 배경이 살짝 비쳐보임. */
+
   border-bottom: 1px solid var(--border);
+  /* 헤더 아랫줄에만 얇은 구분선 추가.
+     border 단축 표기: 두께 | 스타일 | 색상 */
+
   backdrop-filter: blur(18px);
+  /* 헤더 뒤쪽 배경을 18px만큼 흐리게 처리.
+     → iOS 알림센터, macOS 메뉴바 같은 "frosted glass(성에 유리)" 효과.
+     ※ 이 효과는 배경이 반투명해야 보임 (위의 rgba 0.82 덕분에 작동) */
+
   display: flex;
+  /* flex = 자식 요소들을 유연하게 배치하는 레이아웃.
+     기본적으로 자식들이 가로로 한 줄에 나란히 배치됨. */
+
   align-items: center;
+  /* flex에서 세로축(cross axis) 가운데 정렬.
+     → 로고와 메뉴가 헤더 높이 안에서 수직 가운데에 옴. */
+
   justify-content: space-between;
+  /* flex에서 가로축(main axis) 양 끝으로 아이템 배치.
+     → 로고는 왼쪽 끝, 메뉴는 오른쪽 끝에 자동으로 붙음. */
+
   z-index: 999;
+  /* 요소들이 겹칠 때 누가 위에 표시될지 결정하는 값.
+     숫자가 클수록 앞으로 나옴.
+     999로 설정 → 다른 모든 요소(z-index 기본값 0) 위에 항상 표시. */
 }
 
 .header h1,
 .ff-header h1 {
   font-size: 24px;
   letter-spacing: 1px;
-  color: var(--text);
+  /* letter-spacing = 글자와 글자 사이 간격.
+     1px만 넓혀도 로고처럼 조금 더 세련된 느낌이 남. */
+  color: var(--text); /* 흰색 */
 }
 
 .header nav,
 .ff-header nav {
-  display: flex;
+  display: flex; /* 메뉴 항목들도 가로로 나란히 배치 */
   gap: 32px;
+  /* flex/grid에서 자식 요소 사이 간격을 한번에 지정.
+     margin을 일일이 주는 것보다 훨씬 편함. */
 }
 
 .header nav a,
@@ -91,129 +228,212 @@ li {
   font-weight: bold;
   color: var(--text);
   transition: 0.3s;
+  /* transition = 속성값이 바뀔 때 부드럽게 전환되는 시간.
+     0.3초 동안 색상 변화가 서서히 일어남.
+     → 갑자기 확 바뀌는 게 아니라 자연스럽게 변함. */
 }
 
 .header nav a:hover,
 .ff-header nav a:hover {
   color: var(--accent);
+  /* :hover = 마우스를 올렸을 때 적용되는 상태.
+     메뉴 링크에 마우스를 올리면 흰색 → 골드색으로 부드럽게 변함. */
 }
 
-/* ===============================
-   INDEX PAGE
-================================ */
 
+/* ==========================================================================
+   🏠 4단계 — INDEX PAGE (메인 홈 페이지)
+   
+   홈 페이지 전체 레이아웃과 히어로 배너, 바디 타입 카드 섹션 스타일.
+========================================================================== */
+
+/* ── 홈 페이지 전체 래퍼 ── */
 .ff-home {
   width: 100%;
   padding: 110px 28px 70px;
+  /* padding 3개 값: 위 | 좌우 | 아래
+     위를 110px 띄우는 이유: 헤더가 fixed라 콘텐츠 위에 겹치기 때문에
+     헤더 높이(72px)보다 넉넉하게 아래로 내림. */
+
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  /* column = 자식 요소들을 세로로 쌓기.
+     기본값(row)은 가로 배치인데, column으로 바꾸면 섹션들이 위에서 아래로 쌓임. */
+
+  gap: 28px; /* 섹션들 사이 위아래 간격 */
 }
 
+
+/* ── 히어로 배너 (동영상 배경 큰 배너) ── */
 .ff-hero {
   position: relative;
+  /* relative = 이 요소를 기준점으로 설정.
+     내부 absolute 자식들이 이 요소를 기준으로 위치를 잡음. */
+
   width: 100%;
   height: 540px;
+
   overflow: hidden;
-  border-radius: 28px;
+  /* 자식 요소가 이 박스 밖으로 삐져나오면 잘라서 숨김.
+     border-radius(둥근 모서리)와 함께 쓰면, 
+     영상이 모서리 밖으로 나가지 않아 완벽하게 둥근 형태가 됨. */
+
+  border-radius: 28px; /* 모서리를 28px만큼 둥글게 */
   border: 1px solid var(--border);
   background: #000;
   box-shadow: 0 30px 90px rgba(0, 0, 0, 0.36);
+  /* box-shadow = 요소에 그림자 효과.
+     형식: 가로이동 | 세로이동 | 번짐정도 | 색상
+     - 0: 좌우로 이동 없음
+     - 30px: 아래쪽으로 30px
+     - 90px: 아주 넓게 퍼지는 그림자
+     → 카드가 바닥에서 떠있는 것처럼 보이는 깊이감 효과 */
 }
 
 .ff-hero video {
   width: 100%;
   height: 100%;
+
   object-fit: cover;
+  /* 영상이 부모 박스를 꽉 채우도록.
+     비율을 유지하면서 박스를 가득 채우고 넘치는 부분은 잘림.
+     (비율이 안 맞아도 빈 공간이 생기지 않음) */
+
   filter: grayscale(18%) brightness(68%) contrast(118%);
+  /* filter = 이미지/영상에 시각적 효과를 적용.
+     - grayscale(18%): 18%만큼 흑백으로 (100%면 완전 흑백)
+     - brightness(68%): 밝기 68%로 어둡게 (100%가 기본값)
+     - contrast(118%): 명암 대비를 118%로 강하게 (100%가 기본값)
+     → 영상이 배경으로만 사용되도록 어둡고 차분하게 처리 */
 }
 
+/* 히어로 위에 올리는 오버레이 레이어 (::after 가상 요소) */
 .ff-hero::after {
   content: "";
+  /* ::after는 요소 뒤에 가상의 빈 박스를 만드는 방법.
+     content: ""가 없으면 표시되지 않음. (필수값) */
+
   position: absolute;
+  /* absolute = 부모(.ff-hero)를 기준으로 위치 지정.
+     .ff-hero에 position:relative가 있어서 여기 기준이 됨. */
+
   inset: 0;
+  /* inset = top + right + bottom + left를 한번에 지정.
+     inset: 0 → 부모의 네 면에 딱 맞게 꽉 채움. */
+
   background:
+    /* 첫 번째 레이어: 왼쪽→오른쪽 수평 그라디언트 */
     linear-gradient(
-      90deg,
-      rgba(5, 5, 6, 0.94) 0%,
-      rgba(5, 5, 6, 0.68) 42%,
-      rgba(5, 5, 6, 0.22) 100%
+      90deg,              /* 90도 = 왼쪽에서 오른쪽 방향 */
+      rgba(5, 5, 6, 0.94) 0%,   /* 시작점(왼쪽): 거의 불투명한 검정 */
+      rgba(5, 5, 6, 0.68) 42%,  /* 42% 지점: 중간 불투명도 */
+      rgba(5, 5, 6, 0.22) 100%  /* 끝점(오른쪽): 거의 투명 */
+      /* → 왼쪽의 텍스트는 어두운 배경 덕에 잘 보이고,
+            오른쪽은 영상이 살아있어 시각적으로 풍부해짐 */
     ),
+
+    /* 두 번째 레이어: 반복 직선 패턴 (스캔라인/필름 질감) */
     repeating-linear-gradient(
-      0deg,
-      rgba(255, 255, 255, 0.024) 0px,
-      rgba(255, 255, 255, 0.024) 1px,
-      transparent 1px,
-      transparent 4px
+      0deg,                                /* 0도 = 위에서 아래 방향 */
+      rgba(255, 255, 255, 0.024) 0px,      /* 0px: 매우 희미한 흰 선 */
+      rgba(255, 255, 255, 0.024) 1px,      /* 1px: 흰 선 두께 1px */
+      transparent 1px,                      /* 1px 이후: 투명 */
+      transparent 4px                       /* 4px까지 투명 → 반복 */
+      /* → 1px 흰 선 + 3px 투명 = 4px 간격으로 반복되는 가로줄
+            구형 모니터나 영화 필름 같은 레트로한 질감 효과 */
     );
+
   pointer-events: none;
+  /* 이 레이어를 마우스 클릭이 통과하도록 설정.
+     없으면 이 오버레이가 클릭을 가로막아서 영상 제어가 안 됨. */
 }
 
+/* 히어로 좌하단 텍스트 영역 */
 .ff-hero-text {
   position: absolute;
-  left: 52px;
-  bottom: 52px;
+  left: 52px;    /* 부모(.ff-hero) 왼쪽에서 52px */
+  bottom: 52px;  /* 부모(.ff-hero) 아래쪽에서 52px */
   z-index: 3;
+  /* .ff-hero::after보다 z-index가 높아야 텍스트가 오버레이 위에 보임.
+     ::after는 기본 z-index(auto), 여기서 z-index:3으로 명확히 앞으로 당김. */
   max-width: 760px;
 }
 
 .ff-hero-text p {
+  /* 소제목 레이블 스타일 (예: "FIND YOUR STYLE") */
   font-size: 12px;
-  letter-spacing: 4px;
+  letter-spacing: 4px;  /* 자간을 많이 벌려서 "LABEL STYLE" 느낌 */
   font-weight: bold;
   margin-bottom: 16px;
   color: var(--text);
 }
 
 .ff-hero-text h2 {
-  font-size: 76px;
+  font-size: 76px;       /* 큰 임팩트 헤딩 */
   line-height: 0.92;
+  /* line-height = 줄 간격. 1이 기본 (글자 크기와 동일).
+     0.92로 줄이면 줄 간격이 글자보다 약간 좁아짐.
+     큰 헤딩에서 줄 간격이 넓으면 어색해 보여서 좁게 설정. */
   letter-spacing: -2px;
+  /* 큰 글씨는 자간이 벌어져 보이는 현상이 생김.
+     -2px로 약간 좁혀서 자연스럽게 만듦. */
   margin-bottom: 20px;
   color: var(--text);
 }
 
 .ff-hero-text span {
   display: block;
+  /* span은 기본적으로 inline(텍스트처럼 흐름).
+     block으로 바꾸면 줄 전체를 차지하는 박스처럼 동작. */
   color: #e1e1e8;
   font-size: 17px;
-  line-height: 1.7;
+  line-height: 1.7; /* 본문 설명 텍스트는 여유 있는 줄 간격 */
   margin-bottom: 28px;
 }
 
+/* CTA 버튼 (Call To Action - 행동 유도 버튼) */
 .ff-hero-text a {
   display: inline-block;
-  padding: 12px 24px;
-  border: 1px solid var(--accent);
-  border-radius: 100px;
-  color: var(--accent);
+  /* inline-block = 텍스트처럼 흐르면서도 width/height/padding 적용 가능.
+     a 태그는 기본 inline이라 padding 위아래가 잘 안 먹음. inline-block으로 해결. */
+  padding: 12px 24px;       /* 위아래 12px, 좌우 24px */
+  border: 1px solid var(--accent); /* 골드 테두리 */
+  border-radius: 100px;     /* 완전 둥근 알약(pill) 모양 */
+  color: var(--accent);     /* 글자도 골드색 */
   font-weight: bold;
-  transition: 0.3s;
+  transition: 0.3s;         /* 색 변화 0.3초 전환 */
 }
 
 .ff-hero-text a:hover {
-  background: var(--accent);
-  color: #111113;
+  background: var(--accent); /* 호버 시 배경이 골드로 채워짐 */
+  color: #111113;            /* 배경이 밝아지니 글자는 어두운 색으로 반전 */
 }
 
+
+/* ── 바디 타입 선택 섹션 ── */
 .ff-selector {
   width: 100%;
   padding: 48px;
   border-radius: 28px;
+
   background:
     linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.055));
+  /* 135도 대각선 그라디언트: 좌상단(12% 흰색) → 우하단(5.5% 흰색)
+     → 유리판 위에 빛이 비추는 듯한 글래스모피즘 효과 */
+
   border: 1px solid var(--border);
-  backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px); /* 뒤 배경을 흐리게 (유리 효과) */
   box-shadow: 0 26px 80px rgba(0, 0, 0, 0.3);
 }
 
+/* 섹션 제목 블록 */
 .ff-title {
-  margin-bottom: 36px;
+  margin-bottom: 36px; /* 제목 아래 카드 그리드와 간격 */
 }
 
 .ff-title p {
   font-size: 12px;
-  letter-spacing: 4px;
+  letter-spacing: 4px;   /* 소제목 레이블 스타일 */
   font-weight: bold;
   margin-bottom: 12px;
   color: var(--text);
@@ -230,30 +450,42 @@ li {
   font-size: 16px;
 }
 
+/* 바디 타입 카드 그리드 (3열) */
 .ff-grid {
   display: grid;
+  /* CSS Grid = 행과 열로 이루어진 2차원 레이아웃 시스템.
+     Flexbox는 1차원(가로 또는 세로만), Grid는 2차원 모두 제어 가능. */
+
   grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
+  /* repeat(3, 1fr) = 1fr 너비의 열을 3개 반복.
+     fr = fraction(분수). 남은 공간을 균등하게 나눔.
+     → 3개의 열이 항상 동일한 너비로 가득 채움. */
+
+  gap: 18px; /* 카드 사이 간격 (가로, 세로 모두) */
 }
 
+/* 개별 바디 타입 카드 */
 .ff-body-card {
   min-height: 160px;
+  /* min-height = 최소 높이.
+     내용이 적어도 최소 160px는 유지. 내용이 많으면 자동으로 늘어남. */
+
   padding: 24px;
   border-radius: 20px;
-  background: rgba(255, 255, 255, 0.065);
+  background: rgba(255, 255, 255, 0.065); /* 아주 옅은 반투명 흰색 */
   border: 1px solid rgba(255, 255, 255, 0.16);
-  transition: 0.3s;
+  transition: 0.3s; /* hover 시 변화를 0.3초에 걸쳐 부드럽게 */
 }
 
 .ff-body-card span {
   color: var(--muted);
   font-size: 12px;
-  letter-spacing: 2px;
+  letter-spacing: 2px; /* 카드 카테고리 레이블 */
 }
 
 .ff-body-card h3 {
   font-size: 30px;
-  margin: 22px 0 10px;
+  margin: 22px 0 10px; /* 위 22px, 좌우 0, 아래 10px */
   color: var(--text);
 }
 
@@ -263,18 +495,28 @@ li {
   line-height: 1.6;
 }
 
+/* 카드 마우스 호버 효과 */
 .ff-body-card:hover {
   transform: translateY(-6px);
-  background: var(--glass-light);
-  border-color: var(--border-strong);
+  /* transform = 요소를 시각적으로 변환 (실제 위치는 안 바뀜).
+     translateY(-6px) = Y축(세로) -6px → 위로 6px 이동 */
+
+  background: var(--glass-light);      /* 배경 더 밝아짐 */
+  border-color: var(--border-strong);  /* 테두리 골드로 강조 */
 }
 
-/* ===============================
-   GUIDE PAGE
-================================ */
+
+/* ==========================================================================
+   📖 5단계 — GUIDE PAGE (체형별 스타일 가이드)
+   
+   배경 이미지가 있는 카드들로 체형별 패션 가이드를 보여주는 페이지.
+========================================================================== */
 
 .guide-section {
   padding: 120px 42px 80px;
+  /* 위: 120px (헤더 72px + 여유 공간)
+     좌우: 42px
+     아래: 80px */
 }
 
 .guide-section h2 {
@@ -284,68 +526,98 @@ li {
 }
 
 .guide-section > p {
+  /* > p = .guide-section의 직계 자식 <p>만 선택.
+     중첩된 p는 제외하고 바로 아래 자식만 대상으로 함. */
   color: var(--sub);
   margin-bottom: 40px;
   font-size: 16px;
 }
 
+/* 가이드 카드 3열 그리드 */
 .guide-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 25px;
 }
 
+/* 배경 이미지가 있는 큰 카드 */
 .image-guide-card {
   position: relative;
+  /* 내부에 absolute로 배치되는 요소들의 기준점이 됨.
+     (.card-bg, .card-bg::after, 텍스트들이 모두 이것 기준으로 배치됨) */
+
   min-height: 540px;
   padding: 30px;
+
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  overflow: hidden;
+  /* flex-end = 자식들을 세로 끝(아래)에 몰아 배치.
+     → 카드 텍스트가 카드 하단에 붙어있는 이유 */
+
+  overflow: hidden;     /* 이미지가 둥근 모서리 밖으로 안 나가도록 */
   border-radius: 24px;
   border: 1px solid var(--border);
   background: var(--glass);
   backdrop-filter: blur(18px);
   box-shadow: 0 26px 80px rgba(0, 0, 0, 0.3);
   transition: 0.35s;
+
   scroll-margin-top: 110px;
+  /* 페이지 내 앵커(#id)로 이동할 때 헤더에 가려지지 않도록 
+     스크롤 멈추는 위치를 110px 아래로 조정.
+     헤더가 72px이니 여유 있게 110px 설정. */
 }
 
+/* 카드 배경 이미지 컨테이너 */
 .card-bg {
-  position: absolute;
-  inset: 0;
+  position: absolute; /* .image-guide-card를 기준으로 */
+  inset: 0;           /* 카드 전체를 꽉 채움 */
   z-index: 0;
+  /* z-index 0으로 맨 뒤에 배치.
+     텍스트들(z-index:5)이 이 위에 올라가게 됨. */
 }
 
 .card-bg img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+
   object-position: center 20%;
+  /* object-position = object-fit으로 이미지를 자를 때 어느 부분을 보여줄지.
+     center 20% = 가로는 가운데, 세로는 위에서 20% 지점 기준으로 크롭.
+     → 사람 사진이면 얼굴이 잘리지 않게 약간 위쪽을 기준으로 함. */
+
   filter: brightness(72%) contrast(112%);
-  transition: 0.5s;
+  transition: 0.5s; /* 호버 시 이미지 확대 효과의 전환 시간 */
 }
 
+/* 이미지 위에 올리는 어두운 그라디언트 오버레이 */
 .card-bg::after {
   content: "";
   position: absolute;
   inset: 0;
   background:
     linear-gradient(
-      to top,
-      rgba(18, 18, 20, 0.94) 0%,
-      rgba(18, 18, 20, 0.70) 42%,
-      rgba(18, 18, 20, 0.30) 100%
+      to top,                           /* 아래→위 방향 */
+      rgba(18, 18, 20, 0.94) 0%,        /* 하단: 거의 불투명한 어두운 색 */
+      rgba(18, 18, 20, 0.70) 42%,       /* 중간: 중간 불투명도 */
+      rgba(18, 18, 20, 0.30) 100%       /* 상단: 30%로 이미지가 보임 */
     );
+  /* → 카드 하단에는 텍스트가 오기 때문에 어둡게,
+        상단은 이미지가 보이도록 투명하게.
+        자연스럽게 텍스트 가독성과 이미지 시각성 모두 확보. */
 }
 
+/* 텍스트와 핏박스를 오버레이 위로 끌어올리기 */
 .image-guide-card > span,
 .image-guide-card h3,
 .image-guide-card > p,
 .image-guide-card .fit-box {
   position: relative;
   z-index: 5;
+  /* .card-bg(z-index:0)와 .card-bg::after(기본값)보다
+     z-index가 높아야 텍스트가 오버레이 위에 표시됨. */
 }
 
 .image-guide-card > span {
@@ -360,6 +632,9 @@ li {
   font-weight: bold;
   margin: 8px 0;
   text-shadow: 0 4px 18px rgba(0, 0, 0, 0.9);
+  /* text-shadow = 글자에 그림자 추가.
+     형식: 가로이동 | 세로이동 | 번짐 | 색상
+     → 이미지 위에서도 글자가 선명하게 보이도록 검정 그림자 적용 */
 }
 
 .image-guide-card > p {
@@ -370,12 +645,13 @@ li {
   text-shadow: 0 3px 14px rgba(0, 0, 0, 0.9);
 }
 
+/* 카드 하단 추천 핏 정보 박스 */
 .fit-box {
   position: relative;
   z-index: 5;
-  background: rgba(0, 0, 0, 0.54);
+  background: rgba(0, 0, 0, 0.54);           /* 반투명 검정 배경 */
   border: 1px solid rgba(255, 255, 255, 0.30);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);               /* 이미지 배경 블러 */
   padding: 14px;
   margin-top: 10px;
   border-radius: 14px;
@@ -395,39 +671,54 @@ li {
   line-height: 1.6;
 }
 
+/* 가이드 카드 호버 효과 */
 .image-guide-card:hover {
-  transform: translateY(-8px);
-  border-color: var(--border-strong);
+  transform: translateY(-8px);          /* 위로 8px 떠오르는 효과 */
+  border-color: var(--border-strong);   /* 골드 테두리 강조 */
 }
 
 .image-guide-card:hover .card-bg img {
   transform: scale(1.05);
+  /* scale(1.05) = 원래 크기의 105%로 확대.
+     카드에 마우스 올리면 내부 이미지가 살짝 줌인되는 효과.
+     overflow:hidden 덕분에 카드 밖으로 삐져나오지 않음. */
+
   filter: brightness(84%) contrast(114%);
+  /* 호버 시 이미지가 조금 더 밝아짐 (68% → 84%) */
 }
 
 .image-guide-card:hover .fit-box {
   background: rgba(25, 25, 28, 0.78);
-  border-color: rgba(255, 255, 255, 0.45);
+  border-color: rgba(255, 255, 255, 0.45);  /* 테두리 더 밝아짐 */
 }
 
+/* URL #앵커로 해당 카드가 가리켜질 때 (예: page.html#hourglass) */
 .image-guide-card:target {
-  border: 2px solid var(--accent);
+  /* :target = URL의 #해시에 해당하는 요소에 적용되는 상태.
+     예: 페이지 URL이 guide.html#hourglass 이면
+     id="hourglass"인 카드에 이 스타일이 적용됨. */
+
+  border: 2px solid var(--accent);  /* 골드 테두리로 강조 */
   box-shadow:
-    0 0 0 4px rgba(230, 207, 167, 0.18),
+    0 0 0 4px rgba(230, 207, 167, 0.18), /* 외곽에 골드 빛 번짐 */
     0 28px 80px rgba(0, 0, 0, 0.45);
 }
 
-/* ===============================
-   TIPS PAGE
-================================ */
+
+/* ==========================================================================
+   💡 6단계 — TIPS PAGE (스타일 팁 페이지)
+   
+   DO / DON'T 형식으로 패션 팁을 카드로 보여주는 페이지.
+========================================================================== */
 
 .tips-page {
   width: 100%;
   padding: 120px 42px 80px;
 }
 
+/* 팁 페이지 상단 히어로 텍스트 영역 */
 .tips-hero {
-  padding: 40px 0 50px;
+  padding: 40px 0 50px; /* 위아래에 넉넉한 여백으로 타이틀 영역 구분 */
 }
 
 .tips-hero p {
@@ -440,7 +731,7 @@ li {
 
 .tips-hero h2 {
   font-size: 68px;
-  line-height: 0.95;
+  line-height: 0.95;  /* 줄 간격을 꽉 조여서 임팩트 있게 */
   color: var(--text);
   margin-bottom: 18px;
 }
@@ -448,16 +739,18 @@ li {
 .tips-hero span {
   color: var(--sub);
   font-size: 16px;
-  line-height: 1.8;
+  line-height: 1.8; /* 본문 설명은 읽기 편하게 넓은 줄 간격 */
 }
 
+/* 팁 카드 3열 그리드 */
 .easy-tips-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 22px;
-  margin-bottom: 70px;
+  margin-bottom: 70px; /* 아래 요약 박스와의 간격 */
 }
 
+/* 개별 팁 카드 */
 .easy-tip-card {
   min-height: 390px;
   padding: 30px;
@@ -467,8 +760,12 @@ li {
   border: 1px solid var(--border);
   backdrop-filter: blur(18px);
   box-shadow: 0 24px 70px rgba(0, 0, 0, 0.26);
+
   display: flex;
   flex-direction: column;
+  /* 카드 내부를 세로 flex로 설정.
+     이렇게 해야 맨 아래 .tip-do-dont에 margin-top:auto를 쓸 수 있음. */
+
   transition: 0.35s;
 }
 
@@ -476,26 +773,33 @@ li {
   transform: translateY(-8px);
   background:
     linear-gradient(135deg, rgba(255, 255, 255, 0.19), rgba(255, 255, 255, 0.09));
+    /* 호버 시 그라디언트를 약간 더 밝게 (0.14 → 0.19, 0.06 → 0.09) */
   border-color: var(--border-strong);
 }
 
+/* 카드 상단 행: 번호 뱃지 + 카테고리 텍스트 */
 .tip-top {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: space-between; /* 양 끝으로 배치: 번호 뱃지 ← → 카테고리 */
+  align-items: center;            /* 세로 가운데 정렬 */
   margin-bottom: 26px;
 }
 
+/* 원형 번호 뱃지 */
 .tip-top span {
   width: 34px;
   height: 34px;
   border-radius: 50%;
-  background: rgba(230, 207, 167, 0.18);
+  /* 50% = 완전한 원. (width와 height가 같을 때만 원이 됨) */
+
+  background: rgba(230, 207, 167, 0.18); /* 골드 반투명 배경 */
   border: 1px solid rgba(230, 207, 167, 0.45);
   color: var(--text);
+
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: center; /* flex로 번호 텍스트를 원 정가운데에 배치 */
+
   font-size: 12px;
   font-weight: bold;
 }
@@ -503,7 +807,7 @@ li {
 .tip-top strong {
   color: #cfcfd7;
   font-size: 12px;
-  letter-spacing: 2px;
+  letter-spacing: 2px; /* "STYLE", "COLOR" 등 카테고리 레이블 */
 }
 
 .easy-tip-card h3 {
@@ -520,38 +824,47 @@ li {
   margin-bottom: 20px;
 }
 
+/* 태그 목록 */
 .tip-tags {
   display: flex;
   flex-wrap: wrap;
+  /* wrap = 태그가 많아서 공간이 부족하면 다음 줄로 자동 넘어감.
+     nowrap(기본값)이면 한 줄에 다 욱여넣어서 넘침. */
   gap: 8px;
   margin-bottom: 22px;
 }
 
+/* 각 태그 (pill 형태) */
 .tip-tags span {
   padding: 8px 12px;
-  border-radius: 999px;
+  border-radius: 999px; /* 아주 큰 값 = 완전 둥근 알약 모양 */
   background: rgba(255, 255, 255, 0.10);
   border: 1px solid rgba(255, 255, 255, 0.14);
   color: var(--text);
   font-size: 13px;
 }
 
+/* DO / DON'T 비교 영역 */
 .tip-do-dont {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr; /* 동일한 너비의 2열 */
   gap: 10px;
   margin-top: auto;
+  /* auto margin 트릭:
+     부모가 flex-direction:column이면 margin-top:auto는
+     위에 남은 공간을 모두 margin으로 채워 이 요소를 맨 아래로 밀어냄.
+     → 카드 높이가 달라도 DO/DON'T 박스는 항상 카드 하단에 붙음. */
 }
 
 .tip-do-dont div {
   padding: 14px;
   border-radius: 14px;
-  background: rgba(0, 0, 0, 0.24);
+  background: rgba(0, 0, 0, 0.24); /* 태그 박스보다 더 어두운 배경 */
   border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .tip-do-dont h4 {
-  color: var(--accent);
+  color: var(--accent); /* "DO ✓" / "DON'T ✗" 제목을 골드로 강조 */
   font-size: 13px;
   margin-bottom: 8px;
 }
@@ -562,15 +875,19 @@ li {
   line-height: 1.55;
 }
 
+/* 카드 하단 강조 문구 */
 .easy-tip-card em {
   display: inline-block;
   margin-top: 18px;
   color: var(--accent);
   font-style: normal;
+  /* <em>의 기본 스타일은 기울임체(italic).
+     font-style:normal로 기울임 제거하고 일반 텍스트처럼 보이게. */
   font-size: 14px;
   font-weight: bold;
 }
 
+/* 팁 페이지 하단 요약 박스 */
 .tips-summary {
   margin-top: 70px;
   padding: 46px;
@@ -600,51 +917,67 @@ li {
   line-height: 1.8;
 }
 
-/* ===============================
-   ABOUT PAGE
-================================ */
+
+/* ==========================================================================
+   ℹ️ 7단계 — ABOUT PAGE (소개 페이지)
+   
+   영상 배경 히어로, 정보 카드, 디자인 철학, 기술 스택으로 구성된 페이지.
+========================================================================== */
 
 .about-page {
   width: 100%;
   padding: 120px 34px 80px;
 }
 
+/* 어바웃 히어로: 동영상 배경 + 텍스트 */
 .about-hero-bg {
-  position: relative;
+  position: relative; /* 내부 absolute 요소들의 기준 */
   min-height: 620px;
   border-radius: 32px;
-  overflow: hidden;
+  overflow: hidden;   /* 영상과 오버레이가 둥근 모서리 밖으로 안 나가도록 */
   border: 1px solid rgba(255, 255, 255, 0.2);
   background: #000;
   box-shadow: 0 30px 90px rgba(0, 0, 0, 0.38);
 }
 
 .about-hero-bg video {
-  position: absolute;
+  position: absolute;  /* 부모(.about-hero-bg) 기준으로 배치 */
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   filter: brightness(55%) contrast(118%) grayscale(12%);
+
   transform: scale(1.04);
+  /* 영상을 4% 확대하는 이유:
+     border-radius로 모서리를 자르면 모서리 근처에 
+     영상이 없는 검정 배경이 살짝 보일 수 있음.
+     4% 확대하면 그 빈 공간이 영상으로 채워짐. */
 }
 
+/* 영상 위의 세 겹 오버레이 레이어 */
 .about-hero-layer {
   position: absolute;
   inset: 0;
+
   background:
+    /* 1️⃣ 수평 그라디언트: 왼쪽 텍스트 영역은 어둡게, 오른쪽은 영상 보이게 */
     linear-gradient(
       90deg,
-      rgba(5, 5, 7, 0.92) 0%,
-      rgba(5, 5, 7, 0.78) 38%,
-      rgba(5, 5, 7, 0.38) 72%,
-      rgba(5, 5, 7, 0.18) 100%
+      rgba(5, 5, 7, 0.92) 0%,   /* 왼쪽: 거의 불투명 */
+      rgba(5, 5, 7, 0.78) 38%,  /* 38%까지: 진한 오버레이 */
+      rgba(5, 5, 7, 0.38) 72%,  /* 72%: 중간 투명도 */
+      rgba(5, 5, 7, 0.18) 100%  /* 오른쪽: 거의 투명 → 영상 잘 보임 */
     ),
+
+    /* 2️⃣ 수직 그라디언트: 하단 어둡게 (텍스트 가독성) */
     linear-gradient(
-      to top,
-      rgba(0, 0, 0, 0.65),
-      rgba(0, 0, 0, 0.08)
+      to top,                        /* 아래 → 위 */
+      rgba(0, 0, 0, 0.65),           /* 하단: 65% 불투명 */
+      rgba(0, 0, 0, 0.08)            /* 상단: 거의 투명 */
     ),
+
+    /* 3️⃣ 스캔라인 패턴 (레트로 질감) */
     repeating-linear-gradient(
       0deg,
       rgba(255, 255, 255, 0.022) 0px,
@@ -652,53 +985,58 @@ li {
       transparent 1px,
       transparent 4px
     );
-  z-index: 1;
+
+  z-index: 1; /* 영상(absolute, 기본 z-index)보다 위, 텍스트(z-index:2)보다 아래 */
 }
 
+/* 어바웃 히어로 텍스트 */
 .about-hero-content {
   position: relative;
-  z-index: 2;
+  z-index: 2;       /* 오버레이 레이어(z-index:1) 위에 표시 */
   min-height: 620px;
   max-width: 880px;
   padding: 76px;
+
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: center; /* 세로 가운데 정렬 */
 }
 
+/* ── 공통 소제목 레이블 스타일 (세 군데에서 동일하게 사용) ── */
 .about-hero-content > p,
 .about-design-point p,
 .tech-title > p {
   font-size: 12px;
-  letter-spacing: 4px;
+  letter-spacing: 4px; /* 넓은 자간 = 레이블 스타일 */
   font-weight: bold;
   color: var(--text);
   margin-bottom: 20px;
 }
 
 .about-hero-content h2 {
-  font-size: 82px;
+  font-size: 82px;         /* 페이지 내 가장 큰 헤딩 */
   line-height: 0.95;
   letter-spacing: -2px;
   color: var(--text);
   margin-bottom: 30px;
-  text-shadow: 0 6px 28px rgba(0, 0, 0, 0.85);
+  text-shadow: 0 6px 28px rgba(0, 0, 0, 0.85); /* 이미지 위 텍스트 선명하게 */
 }
 
 .about-hero-content span {
   display: block;
-  max-width: 760px;
+  max-width: 760px; /* 본문 텍스트가 너무 넓어지지 않도록 최대 너비 제한 */
   color: #eeeeee;
   font-size: 18px;
   line-height: 1.9;
   text-shadow: 0 4px 18px rgba(0, 0, 0, 0.9);
 }
 
+/* 버튼 그룹 */
 .about-buttons {
   margin-top: 36px;
   display: flex;
   gap: 14px;
-  flex-wrap: wrap;
+  flex-wrap: wrap; /* 화면이 좁아지면 버튼을 다음 줄로 */
 }
 
 .about-buttons a {
@@ -708,15 +1046,17 @@ li {
   color: var(--accent);
   font-weight: bold;
   transition: 0.3s;
-  background: rgba(0, 0, 0, 0.22);
-  backdrop-filter: blur(8px);
+  background: rgba(0, 0, 0, 0.22); /* 반투명 검정 배경 */
+  backdrop-filter: blur(8px);       /* 버튼 뒤도 살짝 블러 */
 }
 
 .about-buttons a:hover {
   background: var(--accent);
-  color: #111113;
+  color: #111113; /* 배경이 밝아지면 글자는 어둡게 */
 }
 
+
+/* ── 어바웃 하단 3열 정보 카드 ── */
 .about-info-final {
   margin-top: 26px;
   display: grid;
@@ -760,13 +1100,21 @@ li {
   line-height: 1.85;
 }
 
+
+/* ── 디자인 철학 섹션 (2열 레이아웃) ── */
 .about-design-point {
   margin-top: 26px;
   padding: 46px;
+
   display: grid;
   grid-template-columns: 1.1fr 1fr;
+  /* 비율로 열 너비 지정:
+     왼쪽(설명 텍스트): 1.1fr, 오른쪽(키워드 태그): 1fr
+     → 전체를 2.1로 나눠서 왼쪽이 약간 더 넓음. */
+
   gap: 34px;
-  align-items: center;
+  align-items: center; /* 두 열의 세로 가운데를 맞춤 */
+
   border-radius: 28px;
   border: 1px solid var(--border);
   background:
@@ -787,15 +1135,16 @@ li {
   line-height: 1.8;
 }
 
+/* 디자인 키워드 태그들 */
 .design-keywords {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: wrap; /* 태그가 많으면 줄바꿈 */
   gap: 12px;
 }
 
 .design-keywords span {
   padding: 12px 18px;
-  border-radius: 100px;
+  border-radius: 100px; /* 완전 둥근 pill */
   background: rgba(255, 255, 255, 0.11);
   border: 1px solid var(--border);
   color: var(--text);
@@ -803,13 +1152,20 @@ li {
   font-size: 14px;
 }
 
+
+/* ── 기술 스택 섹션 (2열 레이아웃) ── */
 .about-tech-final {
   margin-top: 26px;
   padding: 46px;
+
   display: grid;
   grid-template-columns: 0.9fr 1.1fr;
+  /* 왼쪽(설명): 0.9fr, 오른쪽(기술 카드 그리드): 1.1fr
+     오른쪽이 살짝 더 넓어서 기술 카드가 여유 있게 표시됨. */
+
   gap: 34px;
   align-items: center;
+
   border-radius: 28px;
   border: 1px solid var(--border);
   background:
@@ -830,9 +1186,10 @@ li {
   line-height: 1.85;
 }
 
+/* 기술 카드 2x2 그리드 */
 .tech-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, 1fr); /* 동일 너비의 2열 */
   gap: 14px;
 }
 
@@ -845,7 +1202,8 @@ li {
 
 .tech-grid strong {
   display: block;
-  color: var(--accent);
+  /* strong은 기본 inline. block으로 바꿔야 아래 p와 줄이 구분됨. */
+  color: var(--accent); /* 기술 이름을 골드 포인트 컬러로 강조 */
   font-size: 18px;
   margin-bottom: 10px;
 }
@@ -856,66 +1214,96 @@ li {
   line-height: 1.6;
 }
 
-/* ===============================
-   FOOTER
-================================ */
+
+/* ==========================================================================
+   🦶 8단계 — FOOTER (하단 푸터)
+========================================================================== */
 
 .footer {
   width: 92%;
+  /* 100%가 아닌 92%로 설정 + margin:auto 조합.
+     → 좌우에 4%씩 여백이 생기면서 본문 내용과 자연스럽게 정렬됨. */
+
   margin: 0 auto 30px;
+  /* auto = 좌우 margin을 자동으로 균등하게 나눔 = 가운데 정렬.
+     아래 30px 여백도 함께 설정. */
+
   padding-top: 20px;
-  border-top: 1px solid var(--border);
+  border-top: 1px solid var(--border); /* 푸터 위에 가는 구분선 */
   color: var(--sub);
 }
 
-/* ===============================
-   MOBILE
-================================ */
+
+/* ==========================================================================
+   📱 9단계 — MEDIA QUERY (반응형 디자인)
+   
+   @media = 특정 조건에서만 스타일을 적용하는 방법.
+   여기서는 화면 너비가 900px 이하일 때 → 모바일/태블릿용 스타일 적용.
+   
+   ▶ 작동 원리:
+     화면이 900px 초과: 위에서 정의한 기본 스타일 적용 (PC 레이아웃)
+     화면이 900px 이하: 이 @media 블록 안 스타일로 덮어씀 (모바일 레이아웃)
+========================================================================== */
 
 @media (max-width: 900px) {
+
+  /* ── 헤더: 가로 배치 → 세로 배치 전환 ── */
   .header,
   .ff-header {
     height: auto;
+    /* fixed 높이 72px 대신 내용에 맞게 자동으로 조절.
+       세로 배치가 되면 72px으론 부족하므로 auto로 풀어줌. */
+
     padding: 22px;
+
     flex-direction: column;
+    /* row(기본값): 로고와 메뉴가 가로로 나란히 → PC 레이아웃
+       column: 로고 위, 메뉴 아래 → 모바일 레이아웃 */
+
     gap: 16px;
   }
 
   .header nav,
   .ff-header nav {
-    gap: 20px;
-    flex-wrap: wrap;
-    justify-content: center;
+    gap: 20px;            /* 메뉴 항목 간격 줄이기 */
+    flex-wrap: wrap;      /* 메뉴가 많으면 줄바꿈 허용 */
+    justify-content: center; /* 메뉴 가운데 정렬 */
   }
 
+  /* ── 각 페이지 패딩 축소 ── */
   .ff-home,
   .guide-section,
   .tips-page,
   .about-page {
     padding: 140px 22px 60px;
+    /* 세로 헤더로 인해 height가 커지므로 위 패딩 늘림(110→140px).
+       좌우는 넓은 여백이 필요 없으므로 42→22px로 줄임. */
   }
 
+  /* ── 히어로 높이 축소 ── */
   .ff-hero {
-    height: 460px;
+    height: 460px; /* 540px → 460px */
   }
 
+  /* ── 히어로 텍스트 위치 조정 ── */
   .ff-hero-text {
-    left: 26px;
-    bottom: 32px;
+    left: 26px;    /* 52px → 26px */
+    bottom: 32px;  /* 52px → 32px */
   }
 
   .ff-hero-text h2 {
-    font-size: 46px;
+    font-size: 46px; /* 76px → 46px (모바일에서 너무 크지 않게) */
   }
 
   .ff-selector {
-    padding: 30px;
+    padding: 30px; /* 48px → 30px */
   }
 
   .ff-title h2 {
-    font-size: 38px;
+    font-size: 38px; /* 52px → 38px */
   }
 
+  /* ── 핵심: 모든 멀티열 그리드를 1열로 전환 ── */
   .ff-grid,
   .guide-grid,
   .easy-tips-grid,
@@ -924,41 +1312,70 @@ li {
   .about-tech-final,
   .tech-grid {
     grid-template-columns: 1fr;
+    /* repeat(3, 1fr) 또는 1.1fr 1fr 등을 모두 1fr로 덮어씀.
+       → 모바일에서는 카드들이 한 열로 세로로 쌓임. */
   }
 
+  /* ── 각 페이지 제목 글자 크기 줄이기 ── */
   .guide-section h2,
   .tips-hero h2,
   .about-hero-content h2 {
     font-size: 46px;
   }
 
+  /* ── 가이드 카드 높이 조정 ── */
   .image-guide-card {
     min-height: 580px;
+    /* 1열로 넓어지면 카드도 더 커져야
+       이미지와 텍스트가 적절하게 보임. */
   }
 
+  /* ── 팁 카드 최소 높이 제거 ── */
   .easy-tip-card {
     min-height: auto;
+    /* PC에서 390px 고정이었는데, 1열로 바뀌면 내용에 맞게 자동 조절. */
   }
 
+  /* ── DO/DON'T 2열 → 1열 ── */
   .tip-do-dont {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; /* DO와 DON'T가 세로로 쌓임 */
   }
 
+  /* ── 어바웃 히어로 높이 & 패딩 조정 ── */
   .about-hero-bg {
-    min-height: 560px;
+    min-height: 560px; /* 620px → 560px */
   }
 
   .about-hero-content {
     min-height: 560px;
-    padding: 38px 28px;
+    padding: 38px 28px; /* 76px → 38px/28px로 줄이기 */
   }
 
   .about-hero-content span {
-    font-size: 16px;
+    font-size: 16px; /* 18px → 16px */
   }
 
   .about-design-point,
   .about-tech-final {
-    padding: 34px 26px;
+    padding: 34px 26px; /* 46px → 34px/26px */
   }
-}
+
+} /* @media 끝 */
+
+
+/* ==========================================================================
+   📝 전체 CSS 핵심 개념 요약
+   
+   ① CSS 변수(:root)    → 색상을 한 곳에서 관리, var()로 재사용
+   ② Reset              → 브라우저 기본값 초기화로 일관된 시작점 확보
+   ③ position           → relative(기준), absolute(상대위치), fixed(화면고정)
+   ④ z-index            → 요소 겹침 순서 (숫자 클수록 앞으로)
+   ⑤ Flexbox            → 1차원(가로/세로) 정렬 레이아웃
+   ⑥ Grid               → 2차원(행+열) 레이아웃, repeat(3, 1fr) 자주 씀
+   ⑦ ::after 가상요소   → HTML 추가 없이 오버레이/장식 레이어 추가
+   ⑧ filter             → 이미지 색조, 밝기, 흐림 효과
+   ⑨ backdrop-filter    → 요소 뒤 배경에 블러 효과 (frosted glass)
+   ⑩ transition         → 속성 변화를 부드럽게 (hover 애니메이션)
+   ⑪ transform          → 시각적 이동/확대 (translateY, scale)
+   ⑫ @media             → 화면 크기별 다른 스타일 (반응형)
+========================================================================== */

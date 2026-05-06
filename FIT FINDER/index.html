@@ -1,70 +1,203 @@
 <!DOCTYPE html>
+<!-- 
+  DOCTYPE 선언: 이 파일이 HTML5 문서임을 브라우저에게 알려주는 선언문
+  반드시 HTML 파일의 첫 줄에 위치해야 함
+-->
+
 <html lang="ko">
+<!-- 
+  <html> : HTML 문서 전체를 감싸는 최상위 태그
+  lang="ko" : 이 페이지의 언어가 한국어임을 명시
+              검색 엔진, 스크린리더(시각장애인용 도구)가 언어를 인식할 때 사용
+-->
+
 <head>
+<!-- 
+  <head> : 브라우저 화면에 보이지 않는 문서 설정 정보를 담는 영역
+           인코딩, 화면 설정, 제목, 외부 파일 연결 등을 여기서 설정
+-->
+
   <meta charset="UTF-8">
+  <!-- 
+    문자 인코딩 방식을 UTF-8로 설정
+    한글, 영어, 특수문자를 모두 표현할 수 있는 방식
+    이 설정이 없으면 한글이 깨져서 보일 수 있음
+  -->
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- 
+    모바일 화면 대응 설정
+    width=device-width → 화면 너비를 기기의 실제 너비에 맞춤
+    initial-scale=1.0  → 초기 화면 배율을 100%로 설정
+    이 설정이 없으면 모바일에서 PC 화면이 그대로 축소되어 보임
+  -->
+
   <title>FIT FINDER</title>
+  <!-- 브라우저 탭에 표시되는 페이지 제목 -->
 
   <link rel="stylesheet" href="./css/style.css">
+  <!-- 
+    외부 CSS 파일을 현재 HTML 문서에 연결하는 태그
+    rel="stylesheet" → 연결 파일이 CSS 스타일시트임을 명시
+    href="./css/style.css" → CSS 파일 경로 (./ 는 현재 폴더를 의미)
+    이 줄 덕분에 style.css에 작성된 디자인이 이 페이지에 적용됨
+  -->
+
 </head>
 
 <body>
+<!-- 
+  <body> : 브라우저 화면에 실제로 표시되는 모든 내용을 담는 영역
+           사용자 눈에 보이는 것은 전부 여기에 작성
+-->
 
-<!-- HEADER -->
+
+<!-- =============================================
+     HEADER : 상단 로고 + 네비게이션 메뉴 영역
+============================================= -->
 <header class="ff-header">
+<!-- 
+  <header> : 페이지 상단 영역을 나타내는 시맨틱 태그
+  class="ff-header" → style.css에서 .ff-header로 이 영역의 디자인을 지정
+-->
+
   <h1><a href="index.html">FIT FINDER</a></h1>
+  <!-- 
+    <h1> : 페이지에서 가장 중요한 제목 태그
+    <a href="index.html"> : 로고 클릭 시 메인 페이지(index.html)로 이동하는 링크
+    로고를 클릭하면 홈으로 돌아오는 흔한 UX 패턴
+  -->
 
   <nav>
-    <a href="index.html">Intro</a>
-    <a href="guide.html">Guide</a>
-    <a href="tips.html">Tips</a>
-    <a href="about.html">About</a>
+  <!-- 
+    <nav> : 네비게이션(메뉴) 영역을 나타내는 시맨틱 태그
+            사이트 내 다른 페이지로 이동하는 링크들을 묶는 용도
+  -->
+    <a href="index.html">Intro</a>    <!-- 메인(인트로) 페이지로 이동 -->
+    <a href="guide.html">Guide</a>    <!-- 체형 가이드 페이지로 이동 -->
+    <a href="tips.html">Tips</a>      <!-- 스타일 팁 페이지로 이동 -->
+    <a href="about.html">About</a>    <!-- 프로젝트 소개 페이지로 이동 -->
   </nav>
+
 </header>
 
-<!-- MAIN -->
-<main class="ff-home">
 
-  <!-- HERO -->
+<!-- =============================================
+     MAIN : 페이지 핵심 콘텐츠 영역
+============================================= -->
+<main class="ff-home">
+<!-- 
+  <main> : 페이지의 핵심 콘텐츠를 담는 시맨틱 태그
+           header, footer와 구분되는 본문 영역
+           한 페이지에 하나만 사용하는 것이 원칙
+-->
+
+
+  <!-- =============================================
+       HERO : 영상 배경 + 메인 타이틀 텍스트 영역
+  ============================================= -->
   <section class="ff-hero">
+  <!-- 
+    <section> : 하나의 주제를 가진 독립적인 구역 태그
+    class="ff-hero" → 히어로(Hero) 섹션: 페이지 최상단에 크게 표시되는 대표 화면
+  -->
 
     <video autoplay muted loop playsinline>
+    <!-- 
+      <video> : 동영상을 삽입하는 태그
+      autoplay  → 페이지 로드 시 자동 재생
+      muted     → 음소거 상태로 재생 (autoplay는 muted가 없으면 대부분 브라우저에서 차단됨)
+      loop      → 영상이 끝나면 처음부터 다시 반복 재생
+      playsinline → 모바일(iOS)에서 전체화면이 아닌 인라인(제자리)으로 재생
+    -->
+
       <source src="https://assets.awwwards.com/awards/element/2026/03/69b867c9ea0b5478333127.mp4" type="video/mp4">
+      <!-- 
+        <source> : <video> 태그 안에서 실제 영상 파일을 지정하는 태그
+        src  → 재생할 영상 파일의 경로 (여기서는 외부 URL 사용)
+        type → 영상 파일의 형식, video/mp4는 가장 널리 지원되는 포맷
+        <source>를 별도 태그로 분리하면 여러 포맷을 순서대로 시도할 수 있음
+      -->
+
     </video>
 
     <div class="ff-hero-text">
+    <!-- 
+      영상 위에 겹쳐서 표시되는 텍스트 영역
+      CSS에서 position: absolute 등으로 영상 위에 배치함
+    -->
+
       <p>BODY TYPE · SILHOUETTE · FIT GUIDE</p>
+      <!-- 히어로 상단 소개 문구 (키워드 나열) -->
 
       <h2>
         Find the fit<br>
         that fits you.
       </h2>
+      <!-- 
+        <h2> : h1 다음으로 중요한 소제목
+        <br> : 줄바꿈 태그, 닫는 태그 없이 단독으로 사용
+               "Find the fit" 과 "that fits you." 를 두 줄로 나눔
+      -->
 
       <span>
         체형을 선택하면 어울리는 실루엣과 피해야 할 핏을<br>
         한눈에 확인할 수 있습니다.
       </span>
+      <!-- 
+        <span> : 인라인 요소를 묶는 태그
+        여기서는 h2 아래 보조 설명 문구를 스타일링하기 위해 사용
+        <p>를 쓰지 않고 <span>을 쓴 이유는 CSS에서 별도의 스타일 처리가 필요했기 때문
+      -->
 
       <a href="#body-type">Start Guide →</a>
+      <!-- 
+        <a href="#body-type"> : 같은 페이지 내 특정 위치로 이동하는 앵커 링크
+        # 기호 + id명 → 해당 id를 가진 요소가 있는 위치로 스크롤 이동
+        "#body-type" 은 아래 <section id="body-type"> 위치로 이동함
+        → 버튼처럼 보이지만 실제로는 <a> 태그 (CSS로 버튼 모양을 입힘)
+      -->
+
     </div>
 
   </section>
+  <!-- /HERO 끝 -->
 
-  <!-- BODY TYPE -->
+
+  <!-- =============================================
+       BODY TYPE : 체형 선택 카드 영역
+  ============================================= -->
   <section class="ff-selector" id="body-type">
+  <!-- 
+    class="ff-selector" → 이 섹션의 CSS 스타일 지정
+    id="body-type" → 위 히어로의 "Start Guide →" 링크(href="#body-type")가
+                     클릭됐을 때 이 위치로 스크롤 이동되는 앵커 포인트
+  -->
 
     <div class="ff-title">
-      <p>SELECT YOUR BODY TYPE</p>
-      <h2>Choose your silhouette.</h2>
-      <span>체형을 선택하면 Guide 페이지로 이동합니다.</span>
+    <!-- 섹션 상단 타이틀 텍스트 묶음 -->
+      <p>SELECT YOUR BODY TYPE</p>          <!-- 섹션 상단 레이블 -->
+      <h2>Choose your silhouette.</h2>       <!-- 섹션 메인 타이틀 -->
+      <span>체형을 선택하면 Guide 페이지로 이동합니다.</span>  <!-- 안내 문구 -->
     </div>
 
     <div class="ff-grid">
+    <!-- 
+      6개의 체형 카드를 격자 형태로 배열하는 컨테이너
+      실제 격자 배치는 style.css의 .ff-grid에서 CSS Grid로 설정
+    -->
+
+      <!-- 체형 카드: <a> 태그로 만들어 카드 전체를 클릭 가능하게 함 -->
 
       <a href="guide.html#triangle" class="ff-body-card">
-        <span>01</span>
-        <h3>Triangle</h3>
-        <p>하체가 상대적으로 발달한 체형</p>
+      <!-- 
+        <a> 태그로 카드 전체를 링크로 감쌈
+        href="guide.html#triangle" → guide.html 페이지의 id="triangle" 위치로 이동
+        class="ff-body-card" → 모든 카드에 공통으로 적용되는 CSS 스타일
+      -->
+        <span>01</span>           <!-- 카드 번호 -->
+        <h3>Triangle</h3>         <!-- 체형 이름 -->
+        <p>하체가 상대적으로 발달한 체형</p>  <!-- 체형 설명 -->
       </a>
 
       <a href="guide.html#inverted" class="ff-body-card">
@@ -98,10 +231,15 @@
       </a>
 
     </div>
+    <!-- /ff-grid 끝 -->
 
   </section>
+  <!-- /BODY TYPE 끝 -->
+
 
 </main>
+<!-- /MAIN 끝 -->
+
 
 </body>
 </html>
