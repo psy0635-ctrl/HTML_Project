@@ -254,6 +254,6 @@ fix: 모바일 레이아웃 깨짐 수정
 <div align="center">
 
 **© 2026 FIT FINDER · made with HTML5, CSS3 & jQuery**  
-[GitHub](https://github.com/psy0635-ctrl) · [Live Site](https://github.com/psy0635-ctrl/HTML_Project.git/)
+[GitHub](https://github.com/psy0635-ctrl)
 
 </div>
